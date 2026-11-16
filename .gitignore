@@ -1,0 +1,7 @@
+results/
+logs/
+*.zip
+*.png
+*.csv
+__pycache__/
+evaluation_section.md
