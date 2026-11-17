@@ -1,0 +1,17 @@
+run,bin,newly_solved_vs_base
+sft_medium_ckpt60_n8,easy,0
+sft_medium_ckpt60_n8,medium,2
+sft_medium_ckpt60_n8,hard,12
+sft_medium_ckpt60_n8,never,22
+sft_hard_ckpt60_n8,easy,0
+sft_hard_ckpt60_n8,medium,3
+sft_hard_ckpt60_n8,hard,12
+sft_hard_ckpt60_n8,never,22
+sft_medium_ckpt120_n8,easy,0
+sft_medium_ckpt120_n8,medium,4
+sft_medium_ckpt120_n8,hard,9
+sft_medium_ckpt120_n8,never,32
+sft_hard_ckpt120_n8,easy,0
+sft_hard_ckpt120_n8,medium,4
+sft_hard_ckpt120_n8,hard,18
+sft_hard_ckpt120_n8,never,35
