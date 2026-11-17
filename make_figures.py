@@ -36,10 +36,10 @@ def get(table, run, b, col):
     return float(table[(table["run"] == run) & (table["bin"] == b)][col].iloc[0])
 
 
-def fig_curves(table, out):
-    """Figure 1: pass@k curves per test bin, base vs. the two SFT models (checkpoint-120)."""
-    series = [("base_n16", "Base", BASE, "o"), ("sft_medium_ckpt120_n8", "SFT-medium", MED, "s"),
-              ("sft_hard_ckpt120_n8", "SFT-hard", HARD, "^")]
+def fig_curves(table, out, step=120):
+    """Figure 1: pass@k curves per test bin, base vs. the two SFT models (the given checkpoint)."""
+    series = [("base_n16", "Base", BASE, "o"), (f"sft_medium_ckpt{step}_n8", "SFT-medium", MED, "s"),
+              (f"sft_hard_ckpt{step}_n8", "SFT-hard", HARD, "^")]
     fig, axes = plt.subplots(1, 4, figsize=(12, 3.3), sharey=True)
     for ax, b in zip(axes, BINS):
         for run, label, color, marker in series:
@@ -53,7 +53,7 @@ def fig_curves(table, out):
         ax.set_xlabel("k (samples per problem)")
     axes[0].set_ylabel("pass@k")
     axes[0].legend(loc="lower right", fontsize=9)
-    fig.suptitle("pass@k on 200 held-out problems per difficulty bin (SFT models at checkpoint-120)",
+    fig.suptitle(f"pass@k on 200 held-out problems per difficulty bin (SFT models at checkpoint-{step})",
                  fontsize=11, x=0.01, ha="left")
     fig.tight_layout()
     fig.savefig(out, dpi=200)
@@ -128,5 +128,6 @@ if __name__ == "__main__":
     out_dir = sys.argv[2] if len(sys.argv) > 2 else "."
     os.makedirs(out_dir, exist_ok=True)
     fig_curves(table, os.path.join(out_dir, "fig1_passk_curves.png"))
+    fig_curves(table, os.path.join(out_dir, "fig1b_passk_curves_ckpt60.png"), step=60)
     fig_pass8(table, os.path.join(out_dir, "fig2_pass1_pass8_bars.png"))
     fig_checkpoints(table, os.path.join(out_dir, "fig3_checkpoints.png"))
